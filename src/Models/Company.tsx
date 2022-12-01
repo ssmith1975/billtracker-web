@@ -14,4 +14,4 @@ export default interface Company {
     accountNumber: string,
     phone: string,
     dateCreatedUTC: Date
-}
+};

@@ -1,10 +1,6 @@
 import React from 'react';
-//import logo from "../../logo.svg";
-import "./App.css";
-
-
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -16,112 +12,27 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './MenuItems';
-import {GREEN, RED} from '../../themes/swatches';
+
 import {
   BrowserRouter as Router,
-  //Switch,
   Route,
-  Link as RoutLink,
   Routes
 } from "react-router-dom";
 
-import Dashboard from '../Dashboard/Dashboard';
-import CompanyList from '../Companies/CompanyList';
+import Companies from '../Pages/Companies';
+import Dashboard from '../Components/Dashboard/Dashboard';
+import { mainListItems, secondaryListItems } from '../Components/App/MenuItems';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">    
-      <Link color="inherit" href="https://material-ui.com/">
-        Bill Tracker App
-      </Link>{' '}
-      {'Copyright © '}{new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import "./App.css";
+import AppStyles from '../Themes/AppTheme';
+import Copyright from '../Components/App/Copyright';
 
-const drawerWidth = 240;
+const App = () => {
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  appBar: {
-    backgroundColor: GREEN,
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: 'none',
-  },
-  title: {
-    flexGrow: 1,
-  },
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-
-}));
-
-function App() {
-
-    const classes = useStyles();
+    const classes = AppStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -186,11 +97,10 @@ function App() {
                 <Route path="/invoices">
                   Invoice
                 </Route>
-                <Route path="/companies"  element={<CompanyList />} />
+                <Route path="/companies"  element={<Companies />} />
                 <Route path="/" element={<Dashboard />} />            
               </Routes>
             </Router>
-
 
             <Box pt={4}>
               <Copyright />

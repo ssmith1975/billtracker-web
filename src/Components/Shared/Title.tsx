@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-
-  const useStyles = makeStyles((theme) => ({
-    greenText: {
-      color: '#484'
-    },
-  }));
+import TitleStyles from '../../Themes/TitleTheme';
 
 export default function Title(props:any ) {
-const classes = useStyles();
+const classes = TitleStyles();
 
   
   return (

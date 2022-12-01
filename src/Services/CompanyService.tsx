@@ -1,18 +1,14 @@
-import axios from 'axios';
 import Company from '../Models/Company';
-import { API_ROOT_URL } from '../Common/Constants';
-
-
+import { API_ENDPOINT } from '../Common/Constants';
 
 const CompanyService = {
-    getCompanies:  async () => {
-        console.log('calling API /company');
-        
-        const result = await axios(
-           `${API_ROOT_URL}/company`,
-        );
+    getCompanies:  async (): Promise<Array<Company>>  => {
+        console.log(`calling API ${API_ENDPOINT.COMPANY}`);
 
-        return result.data as Array<Company>;  
+        const response = await fetch(
+           API_ENDPOINT.COMPANY
+         );
+        return await response.json() as Array<Company>;  
     }  
 };
 

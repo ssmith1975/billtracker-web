@@ -1,40 +1,32 @@
-import React, {useState,useEffect,MouseEvent} from 'react';
+import React from 'react';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
-import Company from '../../Models/Company';
-import CompanyService from '../../Services/CompanyService';
 
-function preventDefault(event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) {
-    event.preventDefault();
+import Company from '../../Models/Company';
+import {preventDefault} from '../../Common/Utility';
+import CompanyForm from '../Shared/Forms/ValidatedForm';
+
+import Title from '../Shared/Title';
+import CompanyStyles from '../../Themes/CompaniesTheme';
+
+  interface ListProps {
+    data: Array<Company>
   }
-  
-  const useStyles = makeStyles((theme) => ({
-    seeMore: {
-      marginTop: theme.spacing(3),
-      color: '#484'
-    },
-  }));
-  
-  export default function CompanyList() {
-    const classes = useStyles();
-  
-   const [data, setData] = useState([] as Array<Company>);
-    useEffect(() => {
-      const fetchData = async () => {
-   
-        var companies= await CompanyService.getCompanies(); ///result.data as Array<Invoice>;
-        setData(companies);
-      };
-    
-      fetchData();
-    }, []);
-  
+
+  export default function List({data}: ListProps) {
+    const classes = CompanyStyles();
+    let emptyTable =<></>;
+
+    if(!data || !data.length) {
+      emptyTable = <TableRow>
+                    <TableCell colSpan={9}>nothin' to see here!</TableCell>
+                  </TableRow>
+    } 
+
     return (
       <React.Fragment>
         <Title>Companies</Title>
@@ -48,10 +40,8 @@ function preventDefault(event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>
               <TableCell>Date Created</TableCell>  
             </TableRow>
           </TableHead>
-          <TableBody>
-          {/* <TableRow>
-                <TableCell colSpan={9}>nothin' to see here!</TableCell>
-          </TableRow> */}
+          <TableBody data-testid="companiesBody">
+
             {data && data.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.name}</TableCell>
@@ -62,12 +52,17 @@ function preventDefault(event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>
 
              </TableRow>
             ))}
+            {emptyTable}
+
           </TableBody>
         </Table>
         <div className={classes.seeMore}>
           <Link className={classes.seeMore} href="#" onClick={preventDefault}>
             See more companies
           </Link>
+        </div>
+        <div>
+          <CompanyForm />
         </div>
       </React.Fragment>
     );

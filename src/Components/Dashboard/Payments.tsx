@@ -1,33 +1,23 @@
-import React, {useState,useEffect,MouseEvent} from 'react';
+import React from 'react';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
-import Invoice from '../../Models/Invoice';
-import InvoiceService from '../../Services/InvoiceService';
 
-
-
-function preventDefault(event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) {
-  event.preventDefault();
-}
-
-const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-    color: '#484'
-  },
-}));
+// import Invoice from '../../Models/Invoice';
+// import InvoiceService from '../../Services/InvoiceService';
+import {preventDefault} from '../../Common/Utility';
+import Title from '../Shared/Title';
+import PaymentsStyles from '../../Themes/PaymentsTheme';
 
 export default function Payments() {
-  const classes = useStyles();
+  const classes = PaymentsStyles();
 
-  const [data, setData] = useState([] as Array<Invoice>);
-  useEffect(() => {
+  //const [data, setData] = useState([] as Array<Invoice>);
+  //  useEffect(() => {
     // const fetchData = async () => {
  
     //   var invoices= await InvoiceService.getInvoices(); ///result.data as Array<Invoice>;
@@ -35,7 +25,7 @@ export default function Payments() {
     // };
   
     // fetchData();
-  }, []);
+ //  }, []);
 
   return (
     <React.Fragment>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+//import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
 import App from './App';
 //import ResizeObserver from '../../__mocks__/ResizeObserver';
@@ -27,7 +27,7 @@ describe('App', () => {
     render(<App />);
     
     // Act
-    await screen.getByTestId('app-title'); //(/Bill Tracker App/i);
+    screen.getByTestId('app-title'); //(/Bill Tracker App/i);
     //expect(linkElement).toBeInTheDocument();
    
     // Assert
